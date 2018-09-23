@@ -1,8 +1,10 @@
 FROM jenkins/jenkins:lts
-MAINTAINER marciobarroso@gmail.com
-USER root
+MAINTAINER Marcio Barroso <marciobarroso@gmail.com>
 
-# Install the latest Docker CE binaries
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN /usr/local/bin/plugins.sh /usr/share/jenkins/ref/plugins.txt
+
+USER root
 RUN apt-get update && \
     apt-get -y install apt-transport-https \
       ca-certificates \
